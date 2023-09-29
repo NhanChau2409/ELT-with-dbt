@@ -1,0 +1,32 @@
+version: '3'
+services:
+  dbt:
+    container_name: dbt
+    image: ghcr.io/dbt-labs/dbt-postgres:latest
+    working_dir: /root/dbt_project
+    environment:
+      DBT_PROFILES_DIR: /root/dbt_project
+    volumes:
+      - ./dbt_project:/root/dbt_project
+#    command: ["debug", "--config-dir"]
+    command: ["run"]
+    depends_on:
+      - postgres
+    networks:
+      - dbt_network
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5432:5432"
+    networks:
+      - dbt_network
+
+networks:
+  dbt_network:
+    driver: bridge
