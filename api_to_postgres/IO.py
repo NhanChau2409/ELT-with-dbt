@@ -5,15 +5,22 @@ from datetime import datetime
 import psycopg2
 
 
-def write_checkpoint(dt, filename="checkpointing.txt"):
+def write_checkpoint(
+    from_date: datetime, to_date: datetime, filename="checkpointing.txt"
+):
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     with open(filename, "w") as f:
-        f.write(dt.isoformat())
+        f.write(from_date.isoformat())
+        f.write("\n")
+        f.write(to_date.isoformat())
 
 
 def read_checkpoint(filename="checkpointing.txt"):
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     with open(filename, "r") as f:
-        dt_str = f.read()
-        return datetime.fromisoformat(dt_str)
+        from_date = datetime.fromisoformat(f.readline().strip())
+        to_date = datetime.fromisoformat(f.readline().strip())
+        return (from_date, to_date)
 
 
 def connectDB():
