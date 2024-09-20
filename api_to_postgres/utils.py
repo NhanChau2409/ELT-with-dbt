@@ -59,7 +59,7 @@ def split_into_12_hour_segments_with_checkpoint(
 
     while current_start < end_date:
         current_end = min(current_start + timedelta(hours=12), end_date)
-        if current_start > checkpoint_start:
+        if checkpoint_start == None or current_start > checkpoint_start:
             segments.append((current_start, current_end))
         current_start = current_end
 

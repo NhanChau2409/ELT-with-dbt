@@ -18,8 +18,15 @@ def write_checkpoint(
 def read_checkpoint(filename="checkpointing.txt"):
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     with open(filename, "r") as f:
-        from_date = datetime.fromisoformat(f.readline().strip())
-        to_date = datetime.fromisoformat(f.readline().strip())
+        from_date_str = f.readline().strip()
+        to_date_str = f.readline().strip()
+
+        if not from_date_str or not to_date_str:
+            return (None, None)
+
+        from_date = datetime.fromisoformat(from_date_str)
+        to_date = datetime.fromisoformat(to_date_str)
+
         return (from_date, to_date)
 
 
