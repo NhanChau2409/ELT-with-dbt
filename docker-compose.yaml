@@ -1,19 +1,19 @@
 version: "3"
 services:
-  dbt:
-    container_name: dbt
-    image: ghcr.io/dbt-labs/dbt-postgres:latest
-    working_dir: /root/dbt_project
-    environment:
-      DBT_PROFILES_DIR: /root/dbt_project
-    volumes:
-      - ./dbt_project:/root/dbt_project
-    #    command: ["debug", "--config-dir"]
-    command: ["run"]
-    depends_on:
-      - postgres
-    networks:
-      - dbt_network
+  # dbt:
+  #   container_name: dbt
+  #   image: ghcr.io/dbt-labs/dbt-postgres:latest
+  #   working_dir: /root/dbt_project
+  #   environment:
+  #     DBT_PROFILES_DIR: /root/dbt_project
+  #   volumes:
+  #     - ./dbt_project:/root/dbt_project
+  #   #    command: ["debug", "--config-dir"]
+  #   command: ["run"]
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - dbt_network
 
   postgres:
     container_name: postgres
