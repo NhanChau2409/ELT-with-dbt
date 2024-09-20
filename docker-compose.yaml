@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   dbt:
     container_name: dbt
@@ -8,7 +8,7 @@ services:
       DBT_PROFILES_DIR: /root/dbt_project
     volumes:
       - ./dbt_project:/root/dbt_project
-#    command: ["debug", "--config-dir"]
+    #    command: ["debug", "--config-dir"]
     command: ["run"]
     depends_on:
       - postgres
@@ -17,7 +17,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:latest
+    image: postgres
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: myuser
@@ -26,7 +26,28 @@ services:
       - "5432:5432"
     networks:
       - dbt_network
+      - db_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - db_network
+    depends_on:
+      - postgres
 
 networks:
   dbt_network:
     driver: bridge
+  db_network:
+    driver: bridge
+
+volumes:
+  pgdata:
