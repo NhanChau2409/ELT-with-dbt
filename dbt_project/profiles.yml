@@ -1,20 +1,18 @@
-prototype:
-  target: docker
+airport_flights:
+  target: local
   outputs:
     docker:
       type: postgres
       host: postgres
       port: 5432
-      user: myuser
-      pass: mypassword
-      dbname: mydb
-      schema: public
+      user: user
+      pass: password
+      dbname: postgres
 
     local:
       type: postgres
       host: localhost
       port: 5432
-      user: myuser
-      pass: mypassword
-      dbname: mydb
-      schema: public
+      user: user
+      pass: password
+      dbname: postgres

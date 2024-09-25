@@ -1,6 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS airport;
+CREATE SCHEMA IF NOT EXISTS sources;
 
-CREATE TABLE IF NOT EXISTS airport.raw (
+CREATE TABLE IF NOT EXISTS sources.helsinki (
     from_date TIMESTAMP,
     to_date TIMESTAMP,
     icao VARCHAR(10),

@@ -14,7 +14,9 @@ logging.basicConfig(
 )
 
 START_DATE = datetime(2024, 9, 1)
-END_DATE = datetime(2024, 9, 20)
+END_DATE = datetime(2024, 9, 5)
+SCHEMA = "sources"
+TABLE = "helsinki"
 
 if __name__ == "__main__":
     try:
@@ -28,8 +30,8 @@ if __name__ == "__main__":
         for from_date, to_date in date_segemnts:
             data = fetch_airport_data(from_date, to_date, "EFHK")
             cursor.execute(
-                """
-                INSERT INTO airport.raw (from_date, to_date, icao, response)
+                f"""
+                INSERT INTO {SCHEMA}.{TABLE} (from_date, to_date, icao, response)
                 VALUES (%s, %s, %s, %s)
                 """,
                 (
