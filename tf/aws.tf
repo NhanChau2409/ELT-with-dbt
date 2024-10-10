@@ -3,7 +3,6 @@ resource "aws_s3_bucket" "flight_data" {
   bucket = "project-flight-data-bucket"
 }
 
-# Add this new resource to enable bucket ownership controls
 resource "aws_s3_bucket_ownership_controls" "flight_data_ownership" {
   bucket = aws_s3_bucket.flight_data.id
 
@@ -25,7 +24,7 @@ resource "aws_s3_bucket_versioning" "flight_data_versioning" {
   }
 }
 
-# IAM role, user & policy for full access user to the flight data S3 bucket
+# Policy for full access user to the flight data S3 bucket
 data "aws_iam_policy_document" "s3_flight_data_full_access" {
   statement {
     effect = "Allow"
@@ -44,6 +43,7 @@ resource "aws_iam_policy" "s3_flight_data_full_access" {
   policy = data.aws_iam_policy_document.s3_flight_data_full_access.json
 }
 
+# Lambda
 resource "aws_iam_role" "lambda" {
   name = "lambda"
   assume_role_policy = jsonencode({
@@ -65,7 +65,6 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_full_access" {
   policy_arn = aws_iam_policy.s3_flight_data_full_access.arn 
 }
 
-# Lambda function to process flight data
 resource "aws_lambda_function" "s3_flight_data_lambda" {
   function_name = "s3-flight-data-lambda"
   role          = aws_iam_role.lambda.arn
@@ -87,3 +86,18 @@ resource "aws_lambda_function" "s3_flight_data_lambda" {
   }
 }
 
+# Snowflake
+resource "aws_iam_user" "snowflake" {
+  name = "snowflake"
+  force_destroy = true
+}
+
+resource "aws_iam_user_policy_attachment" "snowflake_s3_full_access" {
+  user       = aws_iam_user.snowflake.name
+  policy_arn = aws_iam_policy.s3_flight_data_full_access.arn 
+}
+
+resource "aws_iam_access_key" "snowflake" {
+  user = aws_iam_user.snowflake.name
+  status = "Active"
+}
