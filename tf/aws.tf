@@ -44,19 +44,6 @@ resource "aws_iam_policy" "s3_flight_data_full_access" {
   policy = data.aws_iam_policy_document.s3_flight_data_full_access.json
 }
 
-resource "aws_iam_user" "airbyte" {
-  name = "airbyte"
-}
-
-resource "aws_iam_access_key" "airbyte" {
-  user = aws_iam_user.airbyte.name
-}
-
-resource "aws_iam_user_policy_attachment" "airbyte_s3_full_access" {
-  user       = aws_iam_user.airbyte.name
-  policy_arn = aws_iam_policy.s3_flight_data_full_access.arn
-}
-
 resource "aws_iam_role" "lambda" {
   name = "lambda"
   assume_role_policy = jsonencode({

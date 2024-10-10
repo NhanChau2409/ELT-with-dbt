@@ -17,30 +17,50 @@ This project automates the collection of flight data from an API and stores it i
 
 ## Setup
 
-1. Clone this repository.
+1.  Clone this repository.
 
-2. Set up your AWS credentials:
+    a. Set up your AWS credentials:
 
-   - Create an AWS IAM user with appropriate permissions.
-   - Configure your AWS CLI or set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+    - Create an AWS IAM user with appropriate permissions.
+    - Configure your AWS CLI or set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
-3. Create a `terraform.tfvars` file in the `tf/` directory with the following content:
+    b. Create a `terraform.tfvars` file in the `tf/` directory with the following content:
 
-   ```
-   api_key = "your_api_key_here"
-   access_key = "your_aws_access_key"
-   secret_key = "your_aws_secret_key"
-   ```
+         ```
+         api_key = "your_api_key_here"
+         access_key = "your_aws_access_key"
+         secret_key = "your_aws_secret_key"
+         ```
 
-4. Modify the `tf/locals.tf` file to set your desired airport ICAO code and date range.
+    c. Modify the `tf/locals.tf` file to set your desired airport ICAO code and date range.
 
-5. Package the Lambda function:
-   ```
-   cd api_call
-   pip install -r requirements.txt -t package/
-   zip -r ../lambda_function.zip main.py package/
-   cd ..
-   ```
+    d. Package the Lambda function:
+
+         ```
+         cd api_call
+         pip install -r requirements.txt -t package/
+         zip -r ../lambda_function.zip main.py package/
+         cd ..
+         ```
+
+2.  Set up and launch Airbyte:
+
+    a. Install Docker Engine and Docker Compose plugin on your workstation. For installation instructions, visit the [official Docker documentation](https://docs.airbyte.com/deploying-airbyte/docker-compose).
+
+    b. Clone the Airbyte repository and start it:
+
+    ```bash
+    git clone --depth=1 https://github.com/airbytehq/airbyte.git
+    cd airbyte
+    ./run-ab-platform.sh
+    ```
+
+    c. Once Airbyte is running, visit http://localhost:8000 in your browser.
+
+    d. Log in using the default credentials:
+
+    - Username: airbyte
+    - Password: password
 
 ## Deployment
 
@@ -91,3 +111,5 @@ terraform destroy
 ## Note
 
 Ensure that you keep your API key and AWS credentials secure and do not commit them to version control.
+
+https://docs.getdbt.com/guides/snowflake?step=4
