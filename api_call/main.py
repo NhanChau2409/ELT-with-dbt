@@ -60,7 +60,7 @@ def fetch_and_write_flight_data(event, context):
             "response_code",
             "response",
         ]
-        writer = csv.DictWriter(csv_buffer, fieldnames=fieldnames)
+        writer = csv.DictWriter(csv_buffer, fieldnames=fieldnames, delimiter="|")
         writer.writeheader()
         # Generate file key based on start and end dates and AIRPORT_ICAO
         file_key = f"{AIRPORT_ICAO}/{date_range[0][0].strftime('%Y%m%d_%H%M')}_to_{date_range[-1][-1].strftime('%Y%m%d_%H%M')}.csv"
