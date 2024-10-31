@@ -1,0 +1,175 @@
+models:
+  - name: arrivals
+    description: arrival flight to Helsinki airport
+    docs:
+      show: true
+    config:
+      materialized: table
+    columns:
+      - name: flightNumber
+        description: "The flight number."
+        data_type: string
+
+      - name: flightDate
+        description: "The flight date."
+        data_type: date
+
+      - name: callSign
+        description: "The call sign of the flight."
+        data_type: string
+
+      - name: codeshareStatus
+        description: "The codeshare status of the flight."
+        data_type: string
+
+      - name: isCargo
+        description: "Indicates if the flight is a cargo flight."
+        data_type: boolean
+
+      - name: aircraft_modeS
+        description: "The Mode S code of the aircraft."
+        data_type: string
+
+      - name: aircraft_model
+        description: "The model of the aircraft."
+        data_type: string
+
+      - name: aircraft_reg
+        description: "The registration number of the aircraft."
+        data_type: string
+
+      - name: airline_iata
+        description: "The IATA code of the airline."
+        data_type: string
+
+      - name: airline_icao
+        description: "The ICAO code of the airline."
+        data_type: string
+
+      - name: airline_name
+        description: "The name of the airline."
+        data_type: string
+
+      - name: from_airport_iata
+        description: "The IATA code of the departure airport."
+        data_type: string
+
+      - name: from_airport_icao
+        description: "The ICAO code of the departure airport."
+        data_type: string
+
+      - name: from_airport_name
+        description: "The name of the departure airport."
+        data_type: string
+
+      - name: from_airport_tz
+        description: "The time zone of the departure airport."
+        data_type: string
+
+      - name: baggageBelt
+        description: "The baggage belt information."
+        data_type: string
+
+      - name: gate
+        description: "The gate information."
+        data_type: string
+
+      - name: terminal
+        description: "The terminal information."
+        data_type: string
+
+      - name: revisedTime_utc
+        description: "The revised departure time in UTC."
+        data_type: timestamp
+
+      - name: scheduledTime_utc
+        description: "The scheduled departure time in UTC."
+        data_type: timestamp
+
+
+  - name: departures
+    description: arrival flight to Helsinki airport
+    docs:
+      show: true
+    config:
+      materialized: table
+    columns:
+      - name: flightNumber
+        description: "The flight number."
+        data_type: string
+
+      - name: flightDate
+        description: "The flight date."
+        data_type: date
+
+      - name: callSign
+        description: "The call sign of the flight."
+        data_type: string
+
+      - name: codeshareStatus
+        description: "The codeshare status of the flight."
+        data_type: string
+
+      - name: isCargo
+        description: "Indicates if the flight is a cargo flight."
+        data_type: boolean
+
+      - name: aircraft_modeS
+        description: "The Mode S code of the aircraft."
+        data_type: string
+
+      - name: aircraft_model
+        description: "The model of the aircraft."
+        data_type: string
+
+      - name: aircraft_reg
+        description: "The registration number of the aircraft."
+        data_type: string
+
+      - name: airline_iata
+        description: "The IATA code of the airline."
+        data_type: string
+
+      - name: airline_icao
+        description: "The ICAO code of the airline."
+        data_type: string
+
+      - name: airline_name
+        description: "The name of the airline."
+        data_type: string
+
+      - name: to_airport_iata
+        description: "The IATA code of the arrival airport."
+        data_type: string
+
+      - name: to_airport_icao
+        description: "The ICAO code of the arrival airport."
+        data_type: string
+
+      - name: to_airport_name
+        description: "The name of the arrival airport."
+        data_type: string
+
+      - name: to_airport_tz
+        description: "The time zone of the arrival airport."
+        data_type: string
+
+      - name: baggageBelt
+        description: "The baggage belt information."
+        data_type: string
+
+      - name: gate
+        description: "The gate information."
+        data_type: string
+
+      - name: terminal
+        description: "The terminal information."
+        data_type: string
+
+      - name: revisedTime_utc
+        description: "The revised departure time in UTC."
+        data_type: timestamp
+
+      - name: scheduledTime_utc
+        description: "The scheduled departure time in UTC."
+        data_type: timestamp
