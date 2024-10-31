@@ -1,0 +1,32 @@
+sources:
+  - name: S3
+    description: raw flight data sync with s3
+    database: FLIGHTS
+    schema: PUBLIC
+    tables:
+    - name: S3
+      description: Helsinki aiport flights
+      columns:
+        - name: airport_icao
+          description: "ICAO code of the airport"
+          data_type: string
+
+        - name: timestamp
+          description: "Timestamp of the record"
+          data_type: timestamp
+
+        - name: fromdate
+          description: "Start date of the period"
+          data_type: timestamp
+
+        - name: todate
+          description: "End date of the period"
+          data_type: timestamp
+
+        - name: response_code
+          description: "HTTP response code"
+          data_type: integer
+
+        - name: response
+          description: "Response data in VARIANT format"
+          data_type: variant
