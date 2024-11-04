@@ -100,7 +100,7 @@ models:
 
       - name: flightDate
         description: "The flight date."
-        data_type: string
+        data_type: date
 
       - name: callSign
         description: "The call sign of the flight."
@@ -168,8 +168,8 @@ models:
 
       - name: revisedTime_utc
         description: "The revised departure time in UTC."
-        data_type: string
+        data_type: timestamp
 
       - name: scheduledTime_utc
         description: "The scheduled departure time in UTC."
-        data_type: string
+        data_type: timestamp
