@@ -1,6 +1,6 @@
 select
     f.value:number::string as flightnumber,
-    to_date(f.value:movement.revisedtime.utc)::date as flightdate,
+    to_date(f.value:movement.revisedtime.utc)::string as flightdate,
 
     f.value:callsign::string as callsign,
     f.value:codesharestatus::string as codesharestatus,
@@ -25,8 +25,10 @@ select
     f.value:movement.terminal::string as terminal,
 
     -- f.value:movement.revisedTime.local::TIMESTAMP AS revisedTime_local,
-    f.value:movement.revisedtime.utc::timestamp as revisedtime_utc,
+    f.value:movement.revisedtime.utc::string as revisedtime_utc,
 
     -- f.value:movement.scheduledTime.local::TIMESTAMP AS scheduledTime_local,
-    f.value:movement.scheduledtime.utc::timestamp as scheduledtime_utc
-from {{ source("S3", "S3") }} s, lateral flatten(input => s.response, path => 'arrivals') f
+    f.value:movement.scheduledtime.utc::string as scheduledtime_utc
+from
+    {{ source("S3", "S3") }} s,
+    lateral flatten(input => s.response, path => 'arrivals') f
