@@ -42,26 +42,9 @@ This project automates the collection of flight data from an API and stores it i
          zip -r ../lambda_function.zip main.py package/
          cd ..
          ```
-
-2.  Set up and launch Airbyte:
-
-    a. Install Docker Engine and Docker Compose plugin on your workstation. For installation instructions, visit the [official Docker documentation](https://docs.airbyte.com/deploying-airbyte/docker-compose).
-
-    b. Clone the Airbyte repository and start it:
-
-    ```bash
-    git clone --depth=1 https://github.com/airbytehq/airbyte.git
-    cd airbyte
-    ./run-ab-platform.sh
-    ```
-
-    c. Once Airbyte is running, visit http://localhost:8000 in your browser.
-
-    d. Log in using the default credentials:
-
-    - Username: airbyte
-    - Password: password
-
+2. Set up dbt Cloud
+3. Set up Snowflake
+4. Authenicate Snowflake with dbt
 ## Deployment
 
 1. Initialize Terraform:
@@ -81,13 +64,6 @@ This project automates the collection of flight data from an API and stores it i
    ```
    terraform apply -var-file=terraform.tfvars
    ```
-
-## Components
-
-- S3 bucket: Stores the collected flight data
-- IAM user (airbyte): Has full access to the S3 bucket
-- Lambda function: Fetches flight data from the API and writes it to the S3 bucket
-- IAM role (lambda): Allows the Lambda function to access the S3 bucket
 
 ## Usage
 
