@@ -83,9 +83,3 @@ To remove all created resources:
 ```
 terraform destroy
 ```
-
-## Note
-
-Ensure that you keep your API key and AWS credentials secure and do not commit them to version control.
-
-https://docs.getdbt.com/guides/snowflake?step=4
